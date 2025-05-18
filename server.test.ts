@@ -11,7 +11,8 @@ export function isSnapshotMode(): boolean {
 
 // Strip timing information from test output and "Check file" lines
 function stripTimings(text: string): string {
-  const lines = text.split("\n");
+  const normalizedText = text.replace(/\r\n/g, "\n");
+  const lines = normalizedText.split("\n");
   const filteredLines = lines.filter((line) => !line.startsWith("Check file"));
   return filteredLines.join("\n").replace(/\(\d+m?s\)/g, "(0ms)");
 }
