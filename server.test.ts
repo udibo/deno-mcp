@@ -9,7 +9,6 @@ export function isSnapshotMode(): boolean {
   return Deno.args.some((arg) => arg === "--update" || arg === "-u");
 }
 
-// Strip timing information from test output and "Check file" lines
 function stripTimings(text: string): string {
   const normalizedText = text.replace(/\r\n/g, "\n");
   const lines = normalizedText.split("\n");
