@@ -9,7 +9,7 @@ export function isSnapshotMode(): boolean {
   return Deno.args.some((arg) => arg === "--update" || arg === "-u");
 }
 
-function stripTimings(text: string): string {
+function normalizeTestOutput(text: string): string {
   const normalizedText = text.replace(/\r\n/g, "\n");
   const lines = normalizedText.split("\n");
   const filteredLines = lines.filter((line) => !line.startsWith("Check file"));
@@ -114,12 +114,12 @@ describe("MCP Server", () => {
       "./snapshots/test-tool.txt",
     );
     if (isSnapshotMode()) {
-      await Deno.writeTextFile(snapshotPath, stripTimings(content[0].text));
+      await Deno.writeTextFile(snapshotPath, normalizeTestOutput(content[0].text));
     }
     assertEquals(content[0].type, "text");
     assertEquals(
-      stripTimings(content[0].text),
-      await Deno.readTextFile(snapshotPath),
+      normalizeTestOutput(content[0].text),
+      normalizeTestOutput(await Deno.readTextFile(snapshotPath)),
     );
     assertEquals(result.isError, false);
   });
