@@ -184,10 +184,11 @@ export class StdioClientTransport implements Transport {
     }
   }
 
-  async close(): Promise<void> {
+  close(): Promise<void> {
     this._abortController.abort();
     this._process = undefined;
     this._readBuffer.clear();
+    return Promise.resolve();
   }
 
   send(message: JSONRPCMessage): Promise<void> {
