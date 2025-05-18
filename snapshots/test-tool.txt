@@ -1,0 +1,7 @@
+running 1 test from ./example.test.ts
+example ...
+  should pass ... ok (0ms)
+example ... ok (0ms)
+
+ok | 1 passed (1 step) | 0 failed (0ms)
+
