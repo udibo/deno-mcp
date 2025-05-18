@@ -114,7 +114,10 @@ describe("MCP Server", () => {
       "./snapshots/test-tool.txt",
     );
     if (isSnapshotMode()) {
-      await Deno.writeTextFile(snapshotPath, normalizeTestOutput(content[0].text));
+      await Deno.writeTextFile(
+        snapshotPath,
+        normalizeTestOutput(content[0].text),
+      );
     }
     assertEquals(content[0].type, "text");
     assertEquals(
